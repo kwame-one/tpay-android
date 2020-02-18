@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TPAY</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="add_money">Add Money</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="my_account">My Account</string>
+    <string name="transactions">Transactions</string>
+    <string name="mtn_momo">Mtn Mobile Money</string>
+    <string name="airtel_tigo_money">AirtelTigo Money</string>
+    <string name="vodafone_cash">Vodafone Cash</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_to_continue">Login to continue</string>
+    <string name="phone">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="final_year_project">Final Year Project, CS 2020</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="surname">Surname</string>
+    <string name="other_names">Other Names</string>
+    <string name="have_account">Already have an account?</string>
+</resources>
