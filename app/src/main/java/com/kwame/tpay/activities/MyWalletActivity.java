@@ -1,6 +1,7 @@
 package com.kwame.tpay.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -78,6 +79,8 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
 
                 }else if(position == 3) { // expenses
 
+                }else if(position == 4) { // view qr code
+
                 }
             }
         });
@@ -89,5 +92,26 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
     public void onReturnWalletOptions(List<Option> data) {
         options.addAll(data);
         adapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onActivateWalletSuccess() {
+
+    }
+
+    @Override
+    public void onActivateWalletFailure(String message) {
+        AppUtils.toast(MyWalletActivity.this, message);
+    }
+
+    @Override
+    public void onDeactivateWalletSuccess() {
+
+    }
+
+    @Override
+    public void onDeactivateWalletFailure(String message) {
+
     }
 }

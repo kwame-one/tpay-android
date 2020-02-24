@@ -23,9 +23,19 @@ public class WalletPresenterImp implements WalletPresenter {
         options.add(new Option(R.drawable.ic_block, "Deactivate Wallet"));
         options.add(new Option(R.drawable.ic_balance, "Check Balance"));
         options.add(new Option(R.drawable.ic_expenses, "Expenses"));
-//        options.add(new Option(R.drawable.ic_lock_outline, "Change Pin"));
+        options.add(new Option(R.drawable.ic_qr_code, "View QR Code"));
 
 
         walletListener.onReturnWalletOptions(options);
+    }
+
+    @Override
+    public void activateWallet(int id) {
+        walletListener.onActivateWalletSuccess();
+    }
+
+    @Override
+    public void deactivateWallet() {
+        walletListener.onDeactivateWalletSuccess();
     }
 }

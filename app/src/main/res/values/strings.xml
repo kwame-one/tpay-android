@@ -22,4 +22,11 @@
     <string name="surname">Surname</string>
     <string name="other_names">Other Names</string>
     <string name="have_account">Already have an account?</string>
+    <string name="user">Normal User</string>
+    <string name="driver">Driver</string>
+    <string name="sign_up_as">Sign Up As</string>
+    <string name="save">Save</string>
+    <string name="input_vehicle_details">Input Vehicle Details</string>
+    <string name="vehicle_model">Vehicle Model</string>
+    <string name="vehicle_number">Vehicle Number</string>
 </resources>

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kwame.tpay">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:name=".utils.App"
         android:allowBackup="true"
@@ -24,6 +27,9 @@
         <activity android:name=".activities.SettingsActivity"/>
         <activity android:name=".activities.TransactionsActivity"/>
         <activity android:name=".activities.MyAccountActivity"/>
+        <activity android:name=".activities.SetupDriverActivity"/>
+        <activity android:name=".activities.ScanWalletActivity"/>
+        <activity android:name=".activities.DriverMainActivity"/>
     </application>
 
 </manifest>

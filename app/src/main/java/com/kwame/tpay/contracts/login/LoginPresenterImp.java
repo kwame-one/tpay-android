@@ -12,10 +12,12 @@ public class LoginPresenterImp implements LoginPresenter {
 
     @Override
     public void login(String phone, String password) {
-        String[] strs = {phone, password};
+       // String[] strs = {phone, password};
 
-        if (!AppUtils.isValid(strs))
-            loginListener.onLoginFailure("Please fill all fields");
+        if (phone.isEmpty())
+            loginListener.onLoginFailure("Phone is required");
+        else if (password.isEmpty())
+            loginListener.onLoginFailure("Password is required");
         else {
 
             loginListener.onLoginSuccess();
