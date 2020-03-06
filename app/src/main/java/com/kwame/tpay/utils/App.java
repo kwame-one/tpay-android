@@ -17,8 +17,6 @@ public class App extends Application {
                 .setDefaultFontPath("fonts/Roboto-Regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
-
-        GoodPrefs.getInstance().saveObject("user", null);
     }
 
 

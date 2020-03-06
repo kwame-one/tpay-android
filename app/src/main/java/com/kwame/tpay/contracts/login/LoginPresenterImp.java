@@ -1,5 +1,6 @@
 package com.kwame.tpay.contracts.login;
 
+import com.google.gson.Gson;
 import com.kwame.tpay.remote.ApiClient;
 import com.kwame.tpay.remote.response.AuthResponse;
 import com.kwame.tpay.utils.AppUtils;

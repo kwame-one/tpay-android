@@ -1,5 +1,6 @@
 package com.kwame.tpay.contracts.sign_up;
 
+import com.kwame.tpay.models.Auth;
 import com.kwame.tpay.remote.ApiClient;
 import com.kwame.tpay.remote.response.AuthResponse;
 import com.kwame.tpay.remote.response.DriverResponse;
@@ -74,7 +75,11 @@ public class SignUpPresenterImp implements SignUpPresenter {
                 public void onResponse(Call<DriverResponse> call, Response<DriverResponse> response) {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
-                            AppUtils.updateDriver(response.body().getDriver());
+
+                            Auth auth = GoodPrefs.getInstance().getObject("user", Auth.class);
+                            auth.setDriver(response.body().getDriver());
+                            GoodPrefs.getInstance().saveObject("user", auth);
+
                             AppUtils.saveLogin();
                             signUpListener.onVehicleSetupSuccess();
                         }

@@ -11,8 +11,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.kwame.tpay.R;
 import com.kwame.tpay.models.Auth;
+import com.kwame.tpay.utils.App;
 import com.kwame.tpay.utils.AppUtils;
 import com.kwame.tpay.utils.GoodPrefs;
 
@@ -36,11 +38,10 @@ public class MainActivity extends AppCompatActivity {
         TextView phone = findViewById(R.id.phone);
         TextView name = findViewById(R.id.name);
 
-        Auth user = AppUtils.getUser();
-        if(user != null){
-            name.setText(user.getOtherNames()+" "+user.getSurname());
-            phone.setText(user.getContact());
-        }
+        Auth user = GoodPrefs.getInstance().getObject("user", Auth.class);
+        name.setText(user.getOtherNames()+" "+user.getSurname());
+        phone.setText(user.getContact());
+
 
 
 
