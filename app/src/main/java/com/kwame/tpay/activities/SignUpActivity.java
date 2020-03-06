@@ -1,5 +1,6 @@
 package com.kwame.tpay.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpListener 
     private SignUpPresenterImp presenter;
     private RadioGroup userType;
     private RadioButton user;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpListener 
 
     @Override
     public void onSignUpSuccess() {
+        progressDialog.hide();
         if (user.getText().toString().equalsIgnoreCase("driver")) { // driver
             startActivity(new Intent(SignUpActivity.this, SetupDriverActivity.class));
         }else { // user
@@ -53,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpListener 
 
     @Override
     public void onSignUpFailure(String message) {
+        progressDialog.hide();
         AppUtils.toast(SignUpActivity.this, message);
     }
 
@@ -76,10 +80,13 @@ public class SignUpActivity extends AppCompatActivity implements SignUpListener 
         password = findViewById(R.id.password);
         userType = findViewById(R.id.user_type);
 
+        progressDialog = AppUtils.buildLoading(this, "Signing up, please wait...");
+
         findViewById(R.id.sign_up).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 user = findViewById(userType.getCheckedRadioButtonId());
+                progressDialog.show();
                 presenter.signUp(
                         surname.getText().toString(),
                         otherNames.getText().toString(),

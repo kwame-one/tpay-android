@@ -44,12 +44,29 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     public void onLoginSuccess() {
         progressDialog.hide();
         startActivity(new Intent(context, MainActivity.class));
+        finish();
     }
 
     @Override
     public void onLoginFailure(String message) {
         progressDialog.hide();
         AppUtils.toast(context, message);
+    }
+
+    @Override
+    public void onDriverNotSetup() {
+        progressDialog.hide();
+    //    Intent intent = new Intent(context, SetupDriverActivity.class);
+        startActivity(new Intent(context, SetupDriverActivity.class));
+        finish();
+
+    }
+
+    @Override
+    public void onWalletNotScanned() {
+        progressDialog.hide();
+        startActivity(new Intent(context, ScanWalletActivity.class));
+        finish();
     }
 
     private void init() {
@@ -61,14 +78,13 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         TextView signUp = findViewById(R.id.sign_up);
 
 
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setMessage("Logging in, please wait...");
+        progressDialog = AppUtils.buildLoading(this, "Logging in, please wait");
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 loginPresenterImp.login(phone.getText().toString(), password.getText().toString());
             }
         });

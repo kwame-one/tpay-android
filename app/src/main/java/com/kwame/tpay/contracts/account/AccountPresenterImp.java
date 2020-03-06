@@ -19,7 +19,7 @@ public class AccountPresenterImp implements AccountPresenter {
         List<Option> options = new ArrayList<>();
 
         options.add(new Option(R.drawable.ic_info_outline, "Account Details"));
-        options.add(new Option(R.drawable.ic_lock_outline, "Change Pin"));
+        options.add(new Option(R.drawable.ic_lock_outline, "Change Password"));
 
         accountListener.onReturnAccountOptions(options);
     }

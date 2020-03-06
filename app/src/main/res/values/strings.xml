@@ -29,4 +29,7 @@
     <string name="input_vehicle_details">Input Vehicle Details</string>
     <string name="vehicle_model">Vehicle Model</string>
     <string name="vehicle_number">Vehicle Number</string>
+    <string name="accept_payment">Accept Payment</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="no_transactions">No Transactions Found</string>
 </resources>

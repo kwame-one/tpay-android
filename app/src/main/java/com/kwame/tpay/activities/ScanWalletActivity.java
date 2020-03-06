@@ -1,6 +1,7 @@
 package com.kwame.tpay.activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,8 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
 
     private CodeScanner mCodeScanner;
     private WalletPresenterImp presenterImp;
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
         setContentView(R.layout.activity_scan_wallet);
 
         presenterImp = new WalletPresenterImp(this);
+        progressDialog = AppUtils.buildLoading(this, "Activating wallet, please wait...");
 
 
 
@@ -84,6 +88,7 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
 
     @Override
     public void onActivateWalletSuccess() {
+        progressDialog.hide();
         Intent intent = new Intent(ScanWalletActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -91,17 +96,17 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
 
     @Override
     public void onActivateWalletFailure(String message) {
-
+        progressDialog.hide();
     }
 
     @Override
     public void onDeactivateWalletSuccess() {
-
+        progressDialog.hide();
     }
 
     @Override
     public void onDeactivateWalletFailure(String message) {
-
+        progressDialog.hide();
     }
 
     private void scanWallet() {
@@ -115,6 +120,7 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
                     @Override
                     public void run() {
 //                        AppUtils.toast(ScanWalletActivity.this, result.getText());
+                        progressDialog.show();
                         presenterImp.activateWallet(Integer.parseInt(result.getText()));
                     }
                 });
