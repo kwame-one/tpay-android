@@ -4,6 +4,7 @@ import com.kwame.tpay.R;
 import com.kwame.tpay.models.Auth;
 import com.kwame.tpay.models.Option;
 import com.kwame.tpay.remote.ApiClient;
+import com.kwame.tpay.remote.response.BaseResponse;
 import com.kwame.tpay.remote.response.WalletResponse;
 import com.kwame.tpay.utils.AppUtils;
 import com.kwame.tpay.utils.GoodPrefs;
@@ -38,9 +39,60 @@ public class WalletPresenterImp implements WalletPresenter {
         walletListener.onReturnWalletOptions(options);
     }
 
+
     @Override
-    public void activateWallet(int id) {
-        Call<WalletResponse> call = ApiClient.createService().activateWallet(
+    public void activateWallet() {
+        Call<BaseResponse> call = ApiClient.createService().activateWallet(
+                "Bearer "+AppUtils.getToken()
+        );
+
+        call.enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    Auth user = AppUtils.getUser();
+                    if (response.body() != null) {
+                        user.getWallet().setStatus("activated");
+                        GoodPrefs.getInstance().saveObject("user", user);
+                        walletListener.onActivateWalletSuccess();
+                    }
+                }else
+                    walletListener.onActivateWalletFailure(response.message());
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                walletListener.onActivateWalletFailure(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    @Override
+    public void checkWalletBalance() {
+        Call<WalletResponse> call = ApiClient.createService().checkWalletBalance(
+                "Bearer "+ AppUtils.getToken()
+        );
+        call.enqueue(new Callback<WalletResponse>() {
+            @Override
+            public void onResponse(Call<WalletResponse> call, Response<WalletResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null){
+                        walletListener.onCheckBalanceSuccess(response.body().getWallet().getBalance());
+                    }
+                }else
+                    walletListener.onCheckBalanceFailure(response.message());
+            }
+
+            @Override
+            public void onFailure(Call<WalletResponse> call, Throwable t) {
+                walletListener.onCheckBalanceFailure(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    @Override
+    public void setupWallet(int id) {
+        Call<WalletResponse> call = ApiClient.createService().setupWallet(
                 "Bearer "+ AppUtils.getToken(), id
         );
 
@@ -53,15 +105,15 @@ public class WalletPresenterImp implements WalletPresenter {
                         user.setWallet(response.body().getWallet());
                         GoodPrefs.getInstance().saveObject("user", user);
                         AppUtils.saveLogin();
-                        walletListener.onActivateWalletSuccess();
+                        walletListener.onSetupWalletSuccess();
                     }
                 }else
-                    walletListener.onActivateWalletFailure(response.message());
+                    walletListener.onWalletSetupWalletFailure(response.message());
             }
 
             @Override
             public void onFailure(Call<WalletResponse> call, Throwable t) {
-                walletListener.onActivateWalletFailure(t.getLocalizedMessage());
+                walletListener.onWalletSetupWalletFailure(t.getLocalizedMessage());
             }
         });
 
@@ -69,6 +121,28 @@ public class WalletPresenterImp implements WalletPresenter {
 
     @Override
     public void deactivateWallet() {
-        walletListener.onDeactivateWalletSuccess();
+        Call<BaseResponse> call = ApiClient.createService().deactivateWallet(
+                "Bearer "+ AppUtils.getToken()
+        );
+
+        call.enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    Auth user = AppUtils.getUser();
+                    if (response.body() != null) {
+                        user.getWallet().setStatus("deactivated");
+                        GoodPrefs.getInstance().saveObject("user", user);
+                        walletListener.onDeactivateWalletSuccess();
+                    }
+                }else
+                    walletListener.onDeactivateWalletFailure(response.message());
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                walletListener.onDeactivateWalletFailure(t.getLocalizedMessage());
+            }
+        });
     }
 }

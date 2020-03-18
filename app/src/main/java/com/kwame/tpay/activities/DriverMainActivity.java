@@ -92,7 +92,6 @@ public class DriverMainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 GoodPrefs.getInstance().clearSession();
-                GoodPrefs.getInstance().deleteValue("loggedIn");
                 startActivity(new Intent(context, LoginActivity.class));
                 finish();
             }

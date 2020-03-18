@@ -4,7 +4,11 @@ public interface WalletPresenter {
 
     void getWalletOptions();
 
-    void activateWallet(int id);
+    void setupWallet(int id);
+
+    void activateWallet();
+
+    void checkWalletBalance();
 
     void deactivateWallet();
 }

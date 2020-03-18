@@ -30,6 +30,8 @@
         <activity android:name=".activities.SetupDriverActivity"/>
         <activity android:name=".activities.ScanWalletActivity"/>
         <activity android:name=".activities.DriverMainActivity"/>
+        <activity android:name=".activities.ViewWalletActivity"/>
+        <activity android:name=".activities.ChangePasswordActivity"/>
     </application>
 
 </manifest>

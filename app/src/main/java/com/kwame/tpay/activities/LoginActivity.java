@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.kwame.tpay.R;
 import com.kwame.tpay.contracts.login.LoginListener;
 import com.kwame.tpay.contracts.login.LoginPresenterImp;
+import com.kwame.tpay.models.Auth;
 import com.kwame.tpay.utils.AppUtils;
+import com.kwame.tpay.utils.GoodPrefs;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -43,7 +45,11 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     @Override
     public void onLoginSuccess() {
         progressDialog.hide();
-        startActivity(new Intent(context, MainActivity.class));
+        Auth user = GoodPrefs.getInstance().getObject("user", Auth.class);
+        if (user.getRole().equalsIgnoreCase("driver"))
+            startActivity(new Intent(context, DriverMainActivity.class));
+        else
+            startActivity(new Intent(context, MainActivity.class));
         finish();
     }
 

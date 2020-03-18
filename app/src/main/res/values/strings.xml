@@ -32,4 +32,8 @@
     <string name="accept_payment">Accept Payment</string>
     <string name="withdraw">Withdraw</string>
     <string name="no_transactions">No Transactions Found</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="change_password">Change Password</string>
 </resources>

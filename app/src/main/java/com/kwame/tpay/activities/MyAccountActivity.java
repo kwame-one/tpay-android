@@ -1,6 +1,7 @@
 package com.kwame.tpay.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -71,8 +72,8 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
                 AppUtils.toast(context, options.get(position).getTitle());
                 if (position == 0) { // account details
 
-                }else if (position == 1) { // change pin
-
+                }else if (position == 1) { // change password
+                    startActivity(new Intent(context, ChangePasswordActivity.class));
                 }
             }
         });

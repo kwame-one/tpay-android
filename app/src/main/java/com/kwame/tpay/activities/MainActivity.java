@@ -25,13 +25,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        if (!GoodPrefs.getInstance().getBoolean("loggedIn", false)) {
-            startActivity(new Intent(context, LoginActivity.class));
-            finish();
-        }
-
         setContentView(R.layout.activity_main);
 
         ImageView imageView = findViewById(R.id.profile_image);
@@ -39,8 +32,11 @@ public class MainActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.name);
 
         Auth user = GoodPrefs.getInstance().getObject("user", Auth.class);
-        name.setText(user.getOtherNames()+" "+user.getSurname());
-        phone.setText(user.getContact());
+        AppUtils.print("user "+new Gson().toJson(user));
+        if (user != null){
+           name.setText(user.getOtherNames()+" "+user.getSurname());
+           phone.setText(user.getContact());
+        }
 
 
 
@@ -101,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 GoodPrefs.getInstance().clearSession();
-                GoodPrefs.getInstance().deleteValue("loggedIn");
                 startActivity(new Intent(context, LoginActivity.class));
                 finish();
             }
@@ -110,4 +105,13 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!GoodPrefs.getInstance().getBoolean("loggedIn", false)) {
+            startActivity(new Intent(context, LoginActivity.class));
+            finish();
+        }
+    }
 }

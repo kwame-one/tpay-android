@@ -2,6 +2,7 @@ package com.kwame.tpay.activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +35,7 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
     private CodeScanner mCodeScanner;
     private WalletPresenterImp presenterImp;
     private ProgressDialog progressDialog;
+    private Context context = ScanWalletActivity.this;
 
 
     @Override
@@ -88,6 +90,26 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
 
     @Override
     public void onActivateWalletSuccess() {
+
+    }
+
+    @Override
+    public void onActivateWalletFailure(String message) {
+
+    }
+
+    @Override
+    public void onDeactivateWalletSuccess() {
+      //  progressDialog.hide();
+    }
+
+    @Override
+    public void onDeactivateWalletFailure(String message) {
+      //  progressDialog.hide();
+    }
+
+    @Override
+    public void onSetupWalletSuccess() {
         progressDialog.hide();
         Intent intent = new Intent(ScanWalletActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -95,18 +117,19 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
     }
 
     @Override
-    public void onActivateWalletFailure(String message) {
+    public void onWalletSetupWalletFailure(String message) {
         progressDialog.hide();
+        AppUtils.toast(context, message);
     }
 
     @Override
-    public void onDeactivateWalletSuccess() {
-        progressDialog.hide();
+    public void onCheckBalanceSuccess(double balance) {
+
     }
 
     @Override
-    public void onDeactivateWalletFailure(String message) {
-        progressDialog.hide();
+    public void onCheckBalanceFailure(String message) {
+
     }
 
     private void scanWallet() {
@@ -121,7 +144,7 @@ public class ScanWalletActivity extends AppCompatActivity implements WalletListe
                     public void run() {
 //                        AppUtils.toast(ScanWalletActivity.this, result.getText());
                         progressDialog.show();
-                        presenterImp.activateWallet(Integer.parseInt(result.getText()));
+                        presenterImp.setupWallet(Integer.parseInt(result.getText()));
                     }
                 });
             }

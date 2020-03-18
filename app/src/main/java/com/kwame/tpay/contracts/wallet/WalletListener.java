@@ -19,4 +19,12 @@ public interface WalletListener {
     void onDeactivateWalletSuccess();
 
     void onDeactivateWalletFailure(String message);
+
+    void onSetupWalletSuccess();
+
+    void onWalletSetupWalletFailure(String message);
+
+    void onCheckBalanceSuccess(double balance);
+
+    void onCheckBalanceFailure(String message);
 }
