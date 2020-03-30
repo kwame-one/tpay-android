@@ -63,9 +63,9 @@ public interface ApiInterface {
     Call<WalletResponse> checkWalletBalance(@Header("Authorization") String token);
 
 
-    @Headers("Accept; application/json")
+    @Headers("Accept: application/json")
     @FormUrlEncoded
-    @PUT("user/password/change")
+    @PUT("password/change")
     Call<BaseResponse> changePassword(
             @Header("Authorization") String token,
             @Field("old_password") String oldPassword,

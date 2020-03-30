@@ -69,7 +69,7 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
         adapter.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                AppUtils.toast(context, options.get(position).getTitle());
+
                 if (position == 0) { // account details
 
                 }else if (position == 1) { // change password
@@ -81,6 +81,7 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
 
     @Override
     public void onReturnAccountOptions(List<Option> data) {
+        options.clear();
         options.addAll(data);
         adapter.notifyDataSetChanged();
     }

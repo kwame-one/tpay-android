@@ -70,6 +70,9 @@ public class ChangePasswordActivity extends AppCompatActivity implements ChangeP
     @Override
     public void onChangePasswordSuccess() {
         progressDialog.hide();
+        currentPassword.setText("");
+        newPassword.setText("");
+        confirmPassword.setText("");
         AppUtils.toast(context, "Password Change Successfully");
     }
 
