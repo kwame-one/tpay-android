@@ -36,4 +36,9 @@
     <string name="new_password">New Password</string>
     <string name="retype_password">Retype Password</string>
     <string name="change_password">Change Password</string>
+    <string name="amount">Amount (GHS)</string>
+    <string name="enter_amount">enter amount here</string>
+    <string name="enter_number">enter phone number here</string>
+    <string name="debit">Debit</string>
+    <string name="scan_card">Scan Card</string>
 </resources>

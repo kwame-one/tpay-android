@@ -112,6 +112,15 @@ public class MainActivity extends AppCompatActivity {
         if (!GoodPrefs.getInstance().getBoolean("loggedIn", false)) {
             startActivity(new Intent(context, LoginActivity.class));
             finish();
+            return;
         }
+
+        if (GoodPrefs.getInstance().getObject("user", Auth.class).getRole().equals("driver")) {
+            startActivity(new Intent(context, DriverMainActivity.class));
+            finish();
+            return;
+        }
+
+
     }
 }

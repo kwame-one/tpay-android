@@ -1,5 +1,6 @@
 package com.kwame.tpay.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,8 +28,8 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
 
     private OptionAdapter adapter;
     private List<Option> options = new ArrayList<>();
-    private AccountPresenterImp accountPresenterImp;
     private Context context = MyAccountActivity.this;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +55,10 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
     }
 
     private void init() {
-        accountPresenterImp = new AccountPresenterImp(this);
+
+        progressDialog = AppUtils.buildLoading(context, "Checking balance, please wait...");
+
+        AccountPresenterImp accountPresenterImp = new AccountPresenterImp(this);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_account_options);
         recyclerView.setHasFixedSize(true);
@@ -74,6 +78,9 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
 
                 }else if (position == 1) { // change password
                     startActivity(new Intent(context, ChangePasswordActivity.class));
+                }else if (position == 2) { // check driver balance
+//                    progressDialog.show();
+
                 }
             }
         });
@@ -85,4 +92,6 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
         options.addAll(data);
         adapter.notifyDataSetChanged();
     }
+
+
 }

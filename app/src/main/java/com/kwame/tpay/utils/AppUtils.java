@@ -14,7 +14,11 @@ import com.kwame.tpay.models.Driver;
 
 public class  AppUtils {
 
-    public static final String BASE_URL = "http://www.tpaygh.live/api/";
+    public static final String BASE_URL = "http://51.141.36.140/api/";
+    public static final String MTN = "Mtn";
+    public static final String AIRTELTIGO = "AirtelTigo";
+    public static final String VODAFONE = "Vodafone";
+
 
     public static void toast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();

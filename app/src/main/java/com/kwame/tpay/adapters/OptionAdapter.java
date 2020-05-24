@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kwame.tpay.R;
 import com.kwame.tpay.listeners.ItemClickListener;
+import com.kwame.tpay.models.Auth;
 import com.kwame.tpay.models.Option;
+import com.kwame.tpay.utils.AppUtils;
 
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.WalletVH> 
                     listener.onItemClick(view, getAdapterPosition());
                 }
             });
+
         }
     }
 }

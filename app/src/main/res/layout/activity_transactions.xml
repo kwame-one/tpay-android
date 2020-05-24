@@ -24,11 +24,18 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:id="@+id/recycler_view_transactions"/>
+            android:id="@+id/refresh">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:id="@+id/recycler_view_transactions"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
         <TextView
@@ -38,6 +45,7 @@
             android:textSize="15sp"
             android:textColor="@color/colorPrimaryDark"
             android:visibility="gone"
+            android:gravity="center"
             android:text="@string/no_transactions"/>
 
         <ProgressBar

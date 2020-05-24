@@ -3,6 +3,7 @@ package com.kwame.tpay.remote;
 import com.kwame.tpay.remote.response.AuthResponse;
 import com.kwame.tpay.remote.response.BaseResponse;
 import com.kwame.tpay.remote.response.DriverResponse;
+import com.kwame.tpay.remote.response.TransactionsResponse;
 import com.kwame.tpay.remote.response.WalletResponse;
 
 import retrofit2.Call;
@@ -73,5 +74,8 @@ public interface ApiInterface {
             @Field("password_confirmation") String confirmPassword
     );
 
+    @Headers("Accept: application/json")
+    @GET("user/transactions")
+    Call<TransactionsResponse> getTransactions(@Header("Authorization") String token);
 
 }

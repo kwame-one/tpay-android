@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+
+       <RelativeLayout
+           android:padding="15dp"
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:gravity="center"
+           android:layout_height="?attr/actionBarSize"
+           android:background="@color/colorPrimary"
+           >
+
+           <TextView
+               android:layout_marginStart="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               tools:text="MTN Momo"
+               android:textColor="@color/white"
+               android:textSize="15sp"
+               android:id="@+id/network"
+               android:maxLines="1"
+               android:ellipsize="end"
+               />
+
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_close"
+               android:id="@+id/close"
+               android:layout_alignParentEnd="true"/>
+
+
+       </RelativeLayout>
+
+       <LinearLayout
+           android:padding="20dp"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/phone"
+               android:textSize="15sp"
+               android:textColor="@color/colorPrimary"
+               android:layout_marginBottom="10dp"/>
+
+           <EditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/phone"
+               android:maxLength="10"
+               android:inputType="phone"
+               android:layout_marginBottom="20dp"/>
+
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="@string/amount"
+               android:textSize="15sp"
+               android:textColor="@color/colorPrimary"
+               android:layout_marginBottom="10dp"/>
+
+           <EditText
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/amount"
+               android:inputType="numberDecimal"
+               android:layout_marginBottom="20dp"/>
+
+           <Button
+               android:layout_marginBottom="10dp"
+               android:layout_marginTop="10dp"
+               android:layout_width="match_parent"
+               android:text="@string/debit"
+               android:textAllCaps="false"
+               android:background="@drawable/rounded_button"
+               android:textColor="@color/white"
+               android:textSize="15sp"
+               android:id="@+id/debit"
+               android:layout_height="wrap_content"/>
+
+
+
+       </LinearLayout>
+
+
+   </LinearLayout>
+
+</ScrollView>

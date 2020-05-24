@@ -39,7 +39,7 @@ public class DriverMainActivity extends AppCompatActivity {
         findViewById(R.id.payment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(context, AcceptPaymentActivity.class));
             }
         });
 
