@@ -29,6 +29,8 @@ public class WalletPresenterImp implements WalletPresenter {
         List<Option> options = new ArrayList<>();
 
 //        options.add(new Option(R.drawable.ic_info_outline, "Information"));
+
+//        if(AppUtils.getUser().getWallet().getStatus().equalsIgnoreCase("activated"))
         options.add(new Option(R.drawable.ic_activate, "Activate Wallet"));
         options.add(new Option(R.drawable.ic_block, "Deactivate Wallet"));
         options.add(new Option(R.drawable.ic_balance, "Check Balance"));

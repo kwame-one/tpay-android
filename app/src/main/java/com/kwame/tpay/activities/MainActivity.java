@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (GoodPrefs.getInstance().getObject("user", Auth.class).getRole().equals("driver")) {
+        if (GoodPrefs.getInstance().getObject("user", Auth.class).getRole().equalsIgnoreCase("driver")) {
             startActivity(new Intent(context, DriverMainActivity.class));
             finish();
             return;

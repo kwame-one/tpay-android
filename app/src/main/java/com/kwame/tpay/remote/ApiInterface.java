@@ -66,7 +66,7 @@ public interface ApiInterface {
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
-    @PUT("password/change")
+    @PUT("change_password")
     Call<BaseResponse> changePassword(
             @Header("Authorization") String token,
             @Field("old_password") String oldPassword,
@@ -75,7 +75,7 @@ public interface ApiInterface {
     );
 
     @Headers("Accept: application/json")
-    @GET("user/transactions")
+    @GET("transactions")
     Call<TransactionsResponse> getTransactions(@Header("Authorization") String token);
 
 }
