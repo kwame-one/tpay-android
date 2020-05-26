@@ -34,6 +34,7 @@
         <activity android:name=".activities.ChangePasswordActivity"/>
         <activity android:name=".activities.AcceptPaymentActivity"/>
         <activity android:name=".activities.InitializePaymentActivity"/>
+        <activity android:name=".activities.AccountDetailsActivity"/>
     </application>
 
 </manifest>

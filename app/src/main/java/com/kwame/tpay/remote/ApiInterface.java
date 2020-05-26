@@ -78,4 +78,28 @@ public interface ApiInterface {
     @GET("transactions")
     Call<TransactionsResponse> getTransactions(@Header("Authorization") String token);
 
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @POST("driver/accept_payment")
+    Call<BaseResponse> acceptPayment(
+            @Header("Authorization") String token,
+            @Field("wallet_id") int walletId,
+            @Field("amount") double amount
+    );
+
+    @Headers("Accept: application/json")
+    @GET("driver/balance")
+    Call<DriverResponse> getDriverAccountBalance(@Header("Authorization") String token);
+
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @PUT("update_details")
+    Call<AuthResponse> updateDetails(
+            @Header("Authorization") String token,
+            @Field("other_names") String otherNames,
+            @Field("surname") String surname,
+            @Field("vehicle_number") String vehicleNumber,
+            @Field("vehicle_model") String vehicleModel
+    );
+
 }

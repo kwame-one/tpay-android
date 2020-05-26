@@ -28,6 +28,21 @@ public class Auth {
     @SerializedName("access_token")
     private String token;
 
+
+    public Auth() {
+    }
+
+    public Auth(String surname, String otherNames) {
+        this.surname = surname;
+        this.otherNames = otherNames;
+    }
+
+    public Auth(String surname, String otherNames, Driver driver) {
+        this.surname = surname;
+        this.otherNames = otherNames;
+        this.driver = driver;
+    }
+
     public int getId() {
         return id;
     }

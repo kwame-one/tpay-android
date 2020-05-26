@@ -26,7 +26,7 @@ import com.kwame.tpay.utils.AppUtils;
 public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
     private Context context = AddMoneyActivity.this;
     private PaymentPresenterImp presenterImp;
-
+    private boolean validated = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,6 +90,7 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
         final EditText amount = view.findViewById(R.id.amount);
         Button debit = view.findViewById(R.id.debit);
 
+
         phone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -100,7 +101,6 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String number = charSequence.toString();
 
-                AppUtils.print(number.startsWith("055") ? "True": "False");
 
                 if(network.equals(AppUtils.MTN) && !(number.startsWith("055") || number.startsWith("054") || number.startsWith("024"))){
                     phone.setError("Invalid Mtn number");
@@ -110,6 +110,7 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
                     phone.setError("Invalid Vodafone number");
                 }else{
                     phone.setError(null);
+                    validated = true;
                 }
 
             }
@@ -135,11 +136,14 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
         debit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenterImp.transact(
-                        network,
-                        phone.getText().toString(),
-                        amount.getText().toString()
-                );
+                if (!validated)
+                    AppUtils.toast(context, "Invalid Number");
+                else
+                    presenterImp.transact(
+                            network,
+                            phone.getText().toString(),
+                            amount.getText().toString()
+                    );
             }
         });
 
@@ -149,7 +153,7 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
 
     @Override
     public void onTransactionSuccess() {
-
+        AppUtils.toast(context, "success");
     }
 
     @Override

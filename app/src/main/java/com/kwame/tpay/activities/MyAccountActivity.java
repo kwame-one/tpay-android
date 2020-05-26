@@ -58,7 +58,7 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
 
         progressDialog = AppUtils.buildLoading(context, "Checking balance, please wait...");
 
-        AccountPresenterImp accountPresenterImp = new AccountPresenterImp(this);
+        final AccountPresenterImp accountPresenterImp = new AccountPresenterImp(this);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_account_options);
         recyclerView.setHasFixedSize(true);
@@ -75,12 +75,12 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
             public void onItemClick(View view, int position) {
 
                 if (position == 0) { // account details
-
+                    startActivity(new Intent(context, AccountDetailsActivity.class));
                 }else if (position == 1) { // change password
                     startActivity(new Intent(context, ChangePasswordActivity.class));
                 }else if (position == 2) { // check driver balance
-//                    progressDialog.show();
-
+                    progressDialog.show();
+                    accountPresenterImp.checkDriverAccountBalance();
                 }
             }
         });
@@ -91,6 +91,28 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
         options.clear();
         options.addAll(data);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBalanceSuccess(double amount) {
+        progressDialog.hide();
+        AppUtils.toast(context, "Your balance is GHC "+amount);
+    }
+
+    @Override
+    public void onBalanceFailure(String message) {
+        progressDialog.hide();
+        AppUtils.toast(context, message);
+    }
+
+    @Override
+    public void onUpdateSuccess() {
+
+    }
+
+    @Override
+    public void onUpdateFailure(String message) {
+
     }
 
 

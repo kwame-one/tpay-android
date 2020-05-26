@@ -41,6 +41,7 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.my_wallet));
+        toolbar.setSubtitle(AppUtils.getUser().getWallet().getStatus().toUpperCase());
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeButtonEnabled(true);

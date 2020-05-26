@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Driver {
 
     @SerializedName("id")
-    private String id;
+    private int id;
 
     @SerializedName("vehicle_model")
     private String vehicleModel;
@@ -16,11 +16,19 @@ public class Driver {
     @SerializedName("balance")
     private double balance;
 
-    public String getId() {
+    public Driver() {
+    }
+
+    public Driver(String vehicleModel, String vehicleNumber) {
+        this.vehicleModel = vehicleModel;
+        this.vehicleNumber = vehicleNumber;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

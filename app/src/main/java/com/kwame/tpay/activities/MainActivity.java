@@ -21,25 +21,19 @@ import com.kwame.tpay.utils.GoodPrefs;
 public class MainActivity extends AppCompatActivity {
 
     private Context context = MainActivity.this;
+    private ImageView imageView;
+    private TextView phone, name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageView = findViewById(R.id.profile_image);
-        TextView phone = findViewById(R.id.phone);
-        TextView name = findViewById(R.id.name);
+        imageView = findViewById(R.id.profile_image);
+        phone = findViewById(R.id.phone);
+        name = findViewById(R.id.name);
 
-        Auth user = GoodPrefs.getInstance().getObject("user", Auth.class);
-        AppUtils.print("user "+new Gson().toJson(user));
-        if (user != null){
-           name.setText(user.getOtherNames()+" "+user.getSurname());
-           phone.setText(user.getContact());
-        }
-
-
-
+        displayUserDetails();
 
         findViewById(R.id.wallet).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,5 +116,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayUserDetails();
+    }
+
+    private void displayUserDetails() {
+
+        Auth user = GoodPrefs.getInstance().getObject("user", Auth.class);
+        if (user != null){
+            name.setText(user.getOtherNames()+" "+user.getSurname());
+            phone.setText(user.getContact());
+        }
     }
 }

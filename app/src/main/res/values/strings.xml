@@ -41,4 +41,9 @@
     <string name="enter_number">enter phone number here</string>
     <string name="debit">Debit</string>
     <string name="scan_card">Scan Card</string>
+    <string name="credit_wallet">Credit Wallet</string>
+    <string name="account_details">Account Details</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="vehicle_details">Vehicle Details</string>
+    <string name="update">Update</string>
 </resources>

@@ -61,20 +61,24 @@ public class AcceptPaymentActivity extends AppCompatActivity implements PaymentV
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(context, InitializePaymentActivity.class), PAYMENT);
+                if (amount.getText().toString().isEmpty())
+                    AppUtils.toast(context, "Amount is required");
+                else
+                    startActivityForResult(new Intent(context, InitializePaymentActivity.class), PAYMENT);
             }
         });
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PAYMENT && resultCode == RESULT_OK && data != null) {
             int walletId = Integer.parseInt(data.getStringExtra("result"));
             loading.show();
             presenter.makePayment(walletId, amount.getText().toString());
+
         }
 
     }
