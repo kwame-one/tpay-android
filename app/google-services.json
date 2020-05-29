@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "375514683382",
+    "firebase_url": "https://tpay-b893a.firebaseio.com",
+    "project_id": "tpay-b893a",
+    "storage_bucket": "tpay-b893a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375514683382:android:817a388cecd934d1bf19d7",
+        "android_client_info": {
+          "package_name": "com.kwame.tpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375514683382-a1ud25vtku4c2knt1un31esq8750rkse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiUGzTrfqDSwv_L3vVrh2DCG6jiJNL8lw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375514683382-a1ud25vtku4c2knt1un31esq8750rkse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

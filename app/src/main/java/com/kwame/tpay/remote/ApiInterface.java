@@ -102,4 +102,12 @@ public interface ApiInterface {
             @Field("vehicle_model") String vehicleModel
     );
 
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @PUT("save_token")
+    Call<BaseResponse> updateFcmToken(
+            @Header("Authorization") String token,
+            @Field("token") String fcmToken
+    );
+
 }

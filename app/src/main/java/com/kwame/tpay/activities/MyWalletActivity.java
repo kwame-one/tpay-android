@@ -33,13 +33,14 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
     private Context context = MyWalletActivity.this;
     private WalletPresenterImp presenterImp;
     private ProgressDialog progressDialog;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_wallet);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.my_wallet));
         toolbar.setSubtitle(AppUtils.getUser().getWallet().getStatus().toUpperCase());
         setSupportActionBar(toolbar);
@@ -106,6 +107,7 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
     @Override
     public void onActivateWalletSuccess() {
         progressDialog.hide();
+        toolbar.setSubtitle(AppUtils.getUser().getWallet().getStatus().toUpperCase());
         AppUtils.toast(context, "Wallet activated successfully");
     }
 
@@ -118,6 +120,7 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
     @Override
     public void onDeactivateWalletSuccess() {
         progressDialog.hide();
+        toolbar.setSubtitle(AppUtils.getUser().getWallet().getStatus().toUpperCase());
         AppUtils.toast(context, "Wallet deactivated successfully");
     }
 
@@ -140,7 +143,8 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
     @Override
     public void onCheckBalanceSuccess(double balance) {
         progressDialog.hide();
-        AppUtils.toast(context, "Balance is Ghs "+balance);
+        AppUtils.displayAlert(context, "Account Balance", "Your current balance is Ghs "+balance);
+       // AppUtils.toast(context, "Balance is Ghs "+balance);
     }
 
     @Override

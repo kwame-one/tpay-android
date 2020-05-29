@@ -96,7 +96,8 @@ public class MyAccountActivity extends AppCompatActivity implements AccountListe
     @Override
     public void onBalanceSuccess(double amount) {
         progressDialog.hide();
-        AppUtils.toast(context, "Your balance is GHC "+amount);
+        AppUtils.displayAlert(context, "Account Balance", "Your current balance is Ghs "+amount);
+//        AppUtils.toast(context, "Your balance is GHC "+amount);
     }
 
     @Override

@@ -13,16 +13,19 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.kwame.tpay.R;
+import com.kwame.tpay.contracts.fcm_token.FcmTokenListener;
+import com.kwame.tpay.contracts.fcm_token.FcmTokenPresenterImp;
 import com.kwame.tpay.models.Auth;
 import com.kwame.tpay.utils.App;
 import com.kwame.tpay.utils.AppUtils;
 import com.kwame.tpay.utils.GoodPrefs;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FcmTokenListener {
 
     private Context context = MainActivity.this;
     private ImageView imageView;
     private TextView phone, name;
+    private FcmTokenPresenterImp presenterImp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.profile_image);
         phone = findViewById(R.id.phone);
         name = findViewById(R.id.name);
+
+        presenterImp = new FcmTokenPresenterImp(this);
+        presenterImp.sendTokenToServer();
 
         displayUserDetails();
 
@@ -131,5 +137,10 @@ public class MainActivity extends AppCompatActivity {
             name.setText(user.getOtherNames()+" "+user.getSurname());
             phone.setText(user.getContact());
         }
+    }
+
+    @Override
+    public void onSaveTokenSuccess() {
+
     }
 }

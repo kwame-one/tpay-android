@@ -18,15 +18,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kwame.tpay.R;
+import com.kwame.tpay.contracts.fcm_token.FcmTokenListener;
+import com.kwame.tpay.contracts.fcm_token.FcmTokenPresenterImp;
 import com.kwame.tpay.models.Auth;
 import com.kwame.tpay.utils.AppUtils;
 import com.kwame.tpay.utils.GoodPrefs;
 
-public class DriverMainActivity extends AppCompatActivity {
+public class DriverMainActivity extends AppCompatActivity implements FcmTokenListener {
 
     private Context context = DriverMainActivity.this;
     private ImageView imageView;
     private TextView phone, name;
+    private FcmTokenPresenterImp presenterImp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class DriverMainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.profile_image);
         phone = findViewById(R.id.phone);
         name = findViewById(R.id.name);
+
+        presenterImp = new FcmTokenPresenterImp(this);
+        presenterImp.sendTokenToServer();
 
         displayUserDetails();
 
@@ -157,4 +163,8 @@ public class DriverMainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onSaveTokenSuccess() {
+
+    }
 }

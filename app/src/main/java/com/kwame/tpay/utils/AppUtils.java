@@ -2,6 +2,7 @@ package com.kwame.tpay.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -69,5 +70,20 @@ public class  AppUtils {
     }
 
 
+    public static void displayAlert(Context context, String title, String message) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+        alert.setTitle(title);
+        alert.setMessage(message);
+
+        alert.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        alert.create().show();
+    }
 
 }
