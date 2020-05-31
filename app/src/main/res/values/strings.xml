@@ -47,4 +47,19 @@
     <string name="vehicle_details">Vehicle Details</string>
     <string name="update">Update</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="voucher">Vodafone Voucher</string>
+    <string name="tigo_instruct">
+        1. Dial *5015# to approve your transaction.\n
+        2. Select the transaction to approve and click on send.\n
+        3. Select YES to confirm your payment.
+    </string>
+    <string name="mtn_instruct">
+        1. Dial *170#.\n
+        2. Choose option: 6) Wallet.\n
+        3. Choose option: 3) My Approvals.\n
+        4. Enter your MOMO pin to retrieve your pending approval list.\n
+        5. Choose a pending transaction.\n
+        6. Choose option 1 to approve.\n
+        7. Tap button to continue
+    </string>
 </resources>

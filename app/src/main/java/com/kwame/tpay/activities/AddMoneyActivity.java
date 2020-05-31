@@ -1,6 +1,7 @@
 package com.kwame.tpay.activities;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,6 +28,8 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
     private Context context = AddMoneyActivity.this;
     private PaymentPresenterImp presenterImp;
     private boolean validated = false;
+    private ProgressDialog progressDialog;
+    private String selectedNetwork;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,23 +60,28 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
         findViewById(R.id.mtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(AppUtils.MTN);
+                selectedNetwork = AppUtils.MTN;
+                showDialog(selectedNetwork);
             }
         });
 
         findViewById(R.id.airtelTigo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(AppUtils.AIRTELTIGO);
+                selectedNetwork = AppUtils.AIRTELTIGO;
+                showDialog(selectedNetwork);
             }
         });
 
         findViewById(R.id.vodafone).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog(AppUtils.VODAFONE);
+                selectedNetwork = AppUtils.VODAFONE;
+                showDialog(selectedNetwork);
             }
         });
+
+        progressDialog = AppUtils.buildLoading(context, "Initializing Payment, please wait...");
     }
 
 
@@ -81,7 +89,7 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         ViewGroup viewGroup = findViewById(android.R.id.content);
 
-        final View view = LayoutInflater.from(context).inflate(R.layout.initiate_transaction, viewGroup, false);
+        final View view = LayoutInflater.from(context).inflate(R.layout.dialog_initiate_transaction, viewGroup, false);
         builder.setView(view);
 
         TextView heading = view.findViewById(R.id.network);
@@ -89,6 +97,12 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
         final EditText phone = view.findViewById(R.id.phone);
         final EditText amount = view.findViewById(R.id.amount);
         Button debit = view.findViewById(R.id.debit);
+        final EditText voucher = view.findViewById(R.id.voucher);
+
+        if (network.equalsIgnoreCase(AppUtils.VODAFONE)) {
+            voucher.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.voucher_text).setVisibility(View.VISIBLE);
+        }
 
 
         phone.addTextChangedListener(new TextWatcher() {
@@ -138,12 +152,16 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
             public void onClick(View view) {
                 if (!validated)
                     AppUtils.toast(context, "Invalid Number");
-                else
+                else {
+                    dialog.hide();
+                    progressDialog.show();
                     presenterImp.transact(
                             network,
                             phone.getText().toString(),
-                            amount.getText().toString()
+                            amount.getText().toString(),
+                            voucher.getText().toString()
                     );
+                }
             }
         });
 
@@ -153,12 +171,23 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
 
     @Override
     public void onTransactionSuccess() {
-        AppUtils.toast(context, "success");
+        progressDialog.hide();
+        if (selectedNetwork.equalsIgnoreCase(AppUtils.MTN)) {
+            AppUtils.displayAlert(context, "Authorize Payment", getString(R.string.mtn_instruct));
+        }else if (selectedNetwork.equalsIgnoreCase(AppUtils.VODAFONE)) {
+            AppUtils.displayAlert(context, "Payment Initialized", "You'll be notified upon successful transaction");
+        }else if (selectedNetwork.equalsIgnoreCase(AppUtils.AIRTELTIGO)) {
+            AppUtils.displayAlert(context, "Authorize Payment", getString(R.string.tigo_instruct));
+        }
     }
 
     @Override
     public void onTransactionFailure(String message) {
-        AppUtils.toast(context, message);
+        if (message.equalsIgnoreCase("422")) {
+            AppUtils.toast(context, "Please make sure to fill all fields");
+        }else {
+            AppUtils.toast(context, message);
+        }
     }
 
     @Override

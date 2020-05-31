@@ -110,4 +110,16 @@ public interface ApiInterface {
             @Field("token") String fcmToken
     );
 
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @POST("user/deposit")
+    Call<BaseResponse> creditWallet(
+            @Header("Authorization") String token,
+            @Field("amount") double amount,
+            @Field("phone") String phone,
+            @Field("token") String voucher
+    );
+
+
+
 }

@@ -21,7 +21,6 @@ import com.kwame.tpay.R;
 import com.kwame.tpay.contracts.fcm_token.FcmTokenListener;
 import com.kwame.tpay.contracts.fcm_token.FcmTokenPresenterImp;
 import com.kwame.tpay.models.Auth;
-import com.kwame.tpay.utils.AppUtils;
 import com.kwame.tpay.utils.GoodPrefs;
 
 public class DriverMainActivity extends AppCompatActivity implements FcmTokenListener {
@@ -116,7 +115,7 @@ public class DriverMainActivity extends AppCompatActivity implements FcmTokenLis
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         ViewGroup viewGroup = findViewById(android.R.id.content);
 
-        final View view = LayoutInflater.from(context).inflate(R.layout.initiate_transaction, viewGroup, false);
+        final View view = LayoutInflater.from(context).inflate(R.layout.dialog_initiate_transaction, viewGroup, false);
         builder.setView(view);
 
         TextView heading = view.findViewById(R.id.network);
