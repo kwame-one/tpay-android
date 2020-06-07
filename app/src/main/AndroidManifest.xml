@@ -54,6 +54,7 @@
         <activity android:name=".activities.AcceptPaymentActivity"/>
         <activity android:name=".activities.InitializePaymentActivity"/>
         <activity android:name=".activities.AccountDetailsActivity"/>
+        <activity android:name=".activities.ExpensesActivity"/>
     </application>
 
 </manifest>

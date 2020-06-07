@@ -121,5 +121,15 @@ public interface ApiInterface {
     );
 
 
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @POST("driver/withdraw")
+    Call<BaseResponse> debitWallet(
+            @Header("Authorization") String token,
+            @Field("amount") double amount,
+            @Field("phone") String phone
+    );
+
+
 
 }

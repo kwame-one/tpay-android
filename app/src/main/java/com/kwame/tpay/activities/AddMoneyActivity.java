@@ -116,7 +116,7 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
                 String number = charSequence.toString();
 
 
-                if(network.equals(AppUtils.MTN) && !(number.startsWith("055") || number.startsWith("054") || number.startsWith("024"))){
+                if(network.equals(AppUtils.MTN) && !(number.startsWith("055") || number.startsWith("054") || number.startsWith("024") || number.startsWith("059"))){
                     phone.setError("Invalid Mtn number");
                 }else if(network.equals(AppUtils.AIRTELTIGO) && !(number.startsWith("057") || number.startsWith("027") || number.startsWith("026") || number.startsWith("056"))){
                     phone.setError("Invalid AirtelTigo number");

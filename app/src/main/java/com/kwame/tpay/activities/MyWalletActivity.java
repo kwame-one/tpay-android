@@ -86,7 +86,7 @@ public class MyWalletActivity extends AppCompatActivity implements WalletListene
                 }else if(position == 2) { // check balance
                     checkBalance();
                 }else if(position == 3) { // expenses
-
+                    startActivity(new Intent(context, ExpensesActivity.class));
                 }else if(position == 4) { // view qr code
                     startActivity(new Intent(context, ViewWalletActivity.class));
                 }

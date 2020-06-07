@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -20,7 +22,7 @@ import com.kwame.tpay.models.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionsActivity extends AppCompatActivity implements TransactionsView {
+public class TransactionsActivity extends AppCompatActivity implements TransactionsView, SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
@@ -56,7 +58,13 @@ public class TransactionsActivity extends AppCompatActivity implements Transacti
 
     private void init() {
         refreshLayout = findViewById(R.id.refresh);
+        refreshLayout.setOnRefreshListener(this);
+
         recyclerView = findViewById(R.id.recycler_view_transactions);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(TransactionsActivity.this, RecyclerView.VERTICAL,false));
+        recyclerView.addItemDecoration(new DividerItemDecoration(TransactionsActivity.this, DividerItemDecoration.VERTICAL));
+
         loading = findViewById(R.id.loading);
         info = findViewById(R.id.info);
 
@@ -66,8 +74,11 @@ public class TransactionsActivity extends AppCompatActivity implements Transacti
         );
 
         presenterImp = new TransactionsPresenterImp(this);
+        presenterImp.getTransactions();
 
         adapter = new TransactionAdapter(this, transactions);
+
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -81,6 +92,12 @@ public class TransactionsActivity extends AppCompatActivity implements Transacti
 
             transactions.clear();
             transactions.addAll(data);
+//            for(int i=0; i<data.size(); i++) {
+//                Transaction t = transactions.get(i);
+//
+//                transactions.add(new Transaction(t.getId(), t.getTotal(), t.getType(), t.getDate(), t.getTransactionId()));
+//            }
+
 
             info.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
@@ -110,5 +127,10 @@ public class TransactionsActivity extends AppCompatActivity implements Transacti
         info.setText(message);
 
 
+    }
+
+    @Override
+    public void onRefresh() {
+        presenterImp.getTransactions();
     }
 }

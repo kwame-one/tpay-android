@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kwame.tpay.R;
 import com.kwame.tpay.models.Transaction;
 
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionVH> {
 
@@ -32,7 +34,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TransactionVH holder, int position) {
-
+        Transaction transaction = transactions.get(position);
+        holder.date.setText(transaction.getDate());
+        holder.total.setText("GHS "+ new DecimalFormat("0.00##").format(transaction.getTotal()));
+        holder.type.setText(transaction.getType());
+        holder.status.setText(transaction.getStatus());
     }
 
     @Override
@@ -42,13 +48,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     class TransactionVH extends RecyclerView.ViewHolder {
 
-        private TextView type, total, date;
+        private TextView type, total, date, status;
 
         public TransactionVH(@NonNull View itemView) {
             super(itemView);
             type = itemView.findViewById(R.id.type);
             total = itemView.findViewById(R.id.total);
             date = itemView.findViewById(R.id.date);
+            status = itemView.findViewById(R.id.status);
         }
     }
 }

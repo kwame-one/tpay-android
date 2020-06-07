@@ -1,6 +1,7 @@
 package com.kwame.tpay.activities;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,15 +21,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.kwame.tpay.R;
 import com.kwame.tpay.contracts.fcm_token.FcmTokenListener;
 import com.kwame.tpay.contracts.fcm_token.FcmTokenPresenterImp;
+import com.kwame.tpay.contracts.withdraw.WithdrawListener;
+import com.kwame.tpay.contracts.withdraw.WithdrawPresenterImp;
 import com.kwame.tpay.models.Auth;
+import com.kwame.tpay.utils.AppUtils;
 import com.kwame.tpay.utils.GoodPrefs;
 
-public class DriverMainActivity extends AppCompatActivity implements FcmTokenListener {
+public class DriverMainActivity extends AppCompatActivity implements FcmTokenListener, WithdrawListener {
 
     private Context context = DriverMainActivity.this;
     private ImageView imageView;
     private TextView phone, name;
     private FcmTokenPresenterImp presenterImp;
+    private ProgressDialog progressDialog;
+    private WithdrawPresenterImp presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +46,9 @@ public class DriverMainActivity extends AppCompatActivity implements FcmTokenLis
         phone = findViewById(R.id.phone);
         name = findViewById(R.id.name);
 
+        progressDialog = AppUtils.buildLoading(this, "Initiating transfer, please wait...");
+
+        presenter = new WithdrawPresenterImp(this);
         presenterImp = new FcmTokenPresenterImp(this);
         presenterImp.sendTokenToServer();
 
@@ -139,7 +148,9 @@ public class DriverMainActivity extends AppCompatActivity implements FcmTokenLis
         withdraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                dialog.hide();
+                progressDialog.show();
+                presenter.withdraw(phone.getText().toString(), amount.getText().toString());
             }
         });
 
@@ -165,5 +176,17 @@ public class DriverMainActivity extends AppCompatActivity implements FcmTokenLis
     @Override
     public void onSaveTokenSuccess() {
 
+    }
+
+    @Override
+    public void onWithdrawalSuccess() {
+        progressDialog.hide();
+        AppUtils.displayAlert(DriverMainActivity.this, "Transfer Initiated", "Withdrawal is in progress. You will be notified soon");
+    }
+
+    @Override
+    public void onWithdrawalFailure(String message) {
+        progressDialog.hide();
+        AppUtils.displayAlert(DriverMainActivity.this, "Error", message);
     }
 }

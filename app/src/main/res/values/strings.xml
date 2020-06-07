@@ -62,4 +62,5 @@
         6. Choose option 1 to approve.\n
         7. Tap button to continue
     </string>
+    <string name="expenses">Expenses</string>
 </resources>

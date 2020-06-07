@@ -16,8 +16,12 @@ public class Transaction {
     @SerializedName("date")
     private String date;
 
+    @SerializedName("status")
+    private String status;
+
     @SerializedName("code")
     private String transactionId;
+
 
 
     public int getId() {
@@ -58,5 +62,13 @@ public class Transaction {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
