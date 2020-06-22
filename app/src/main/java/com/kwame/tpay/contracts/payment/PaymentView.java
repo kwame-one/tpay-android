@@ -2,7 +2,7 @@ package com.kwame.tpay.contracts.payment;
 
 public interface PaymentView {
 
-    void onTransactionSuccess();
+    void onTransactionSuccess(String link);
 
     void onTransactionFailure(String message);
 

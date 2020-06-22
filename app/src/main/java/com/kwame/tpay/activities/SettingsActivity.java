@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.kwame.tpay.R;
+import com.kwame.tpay.fragments.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -29,6 +30,9 @@ public class SettingsActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+
+        getSupportFragmentManager(). beginTransaction().replace(R.id.container, new SettingsFragment()).commit();
 
     }
 }

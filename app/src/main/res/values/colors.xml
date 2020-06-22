@@ -6,4 +6,5 @@
     <color name="white">#ffffff</color>
     <color name="lightGrey">#F0F0F0</color>
     <color name="black">#000000</color>
+    <color name="selected_range_color">#6fa4e8</color>
 </resources>

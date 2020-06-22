@@ -85,7 +85,7 @@ public class AcceptPaymentActivity extends AppCompatActivity implements PaymentV
 
 
     @Override
-    public void onTransactionSuccess() {
+    public void onTransactionSuccess(String link) {
 
     }
 

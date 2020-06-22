@@ -3,9 +3,13 @@ package com.kwame.tpay.activities;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,15 +174,30 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentView {
     }
 
     @Override
-    public void onTransactionSuccess() {
+    public void onTransactionSuccess(String link) {
         progressDialog.hide();
-        if (selectedNetwork.equalsIgnoreCase(AppUtils.MTN)) {
-            AppUtils.displayAlert(context, "Authorize Payment", getString(R.string.mtn_instruct));
-        }else if (selectedNetwork.equalsIgnoreCase(AppUtils.VODAFONE)) {
-            AppUtils.displayAlert(context, "Payment Initialized", "You'll be notified upon successful transaction");
-        }else if (selectedNetwork.equalsIgnoreCase(AppUtils.AIRTELTIGO)) {
-            AppUtils.displayAlert(context, "Authorize Payment", getString(R.string.tigo_instruct));
-        }
+
+        TextView url = new TextView(context);
+        url.setPadding(20, 20, 20, 20);
+        url.setTextSize(15);
+        SpannableString message =  new SpannableString("Please visit the link below to continue with the payment process\n" +link);
+        Linkify.addLinks(message, Linkify.WEB_URLS);
+        url.setText(message);
+        url.setMovementMethod(LinkMovementMethod.getInstance());
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle("Momo Initiated");
+        alert.setPositiveButton("CLOSE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        alert.setView(url);
+        alert.create().show();
+
+
+
     }
 
     @Override

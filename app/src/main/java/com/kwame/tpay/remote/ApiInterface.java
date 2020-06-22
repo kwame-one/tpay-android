@@ -3,6 +3,8 @@ package com.kwame.tpay.remote;
 import com.kwame.tpay.remote.response.AuthResponse;
 import com.kwame.tpay.remote.response.BaseResponse;
 import com.kwame.tpay.remote.response.DriverResponse;
+import com.kwame.tpay.remote.response.ExpensesResponse;
+import com.kwame.tpay.remote.response.PaymentResponse;
 import com.kwame.tpay.remote.response.TransactionsResponse;
 import com.kwame.tpay.remote.response.WalletResponse;
 
@@ -14,6 +16,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -113,7 +116,7 @@ public interface ApiInterface {
     @Headers("Accept: application/json")
     @FormUrlEncoded
     @POST("user/deposit")
-    Call<BaseResponse> creditWallet(
+    Call<PaymentResponse> creditWallet(
             @Header("Authorization") String token,
             @Field("amount") double amount,
             @Field("phone") String phone,
@@ -130,6 +133,13 @@ public interface ApiInterface {
             @Field("phone") String phone
     );
 
+
+    @Headers("Accept: application/json")
+    @GET("user/expenses")
+    Call<ExpensesResponse> getExpenses(
+            @Header("Authorization") String token,
+            @Query("start") String start, @Query("end") String end
+    );
 
 
 }
